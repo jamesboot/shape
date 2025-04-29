@@ -16,14 +16,22 @@ ml Bowtie2/2.5.1-GCC-12.3.0
 # Directories
 PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape
 INDEXDIR=${PROJDIR}/02_bowtie2_index
-INPUT=${PROJDIR}/T7_tRNA_Ala_AGC_2_1.fasta
+INPUT1=${PROJDIR}/tRNA_Ala_AGC_2_1.fa
+INPUT2=${PROJDIR}/tRNA_Pro_TGG_3_5.fa
 
 # Make directories
 mkdir -p ${INDEXDIR}
 
-# Create bowtie2 index
+# Create bowtie2 index1
 bowtie2-build \
         --threads ${SLURM_CPUS_PER_TASK} \
         -f \
-        ${INPUT} \
-        ${INDEXDIR}/tRNA_index
+        ${INPUT1} \
+        ${INDEXDIR}/tRNA_Ala_index
+
+# Create bowtie2 index2
+bowtie2-build \
+        --threads ${SLURM_CPUS_PER_TASK} \
+        -f \
+        ${INPUT2} \
+        ${INDEXDIR}/tRNA_Pro_index

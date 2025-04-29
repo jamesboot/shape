@@ -17,75 +17,85 @@ ml MultiQC/1.25.1
 PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape
 PREPROCESSDIR=${PROJDIR}/01_preprocess_reads_outs
 FASTQDIR=${PREPROCESSDIR}/05_adjusted_header
-RESULTSDIR=${PROJDIR}/02_bowtie2_outs
-INDEX=${PROJDIR}/02_bowtie2_index/tRNA_index
+INDEX1=${PROJDIR}/02_bowtie2_index/tRNA_Ala_index
+INDEX2=${PROJDIR}/02_bowtie2_index/tRNA_Pro_index
+INDEXLIST=(${INDEX1} ${INDEX2})
 
-# Make directories
-mkdir -p ${RESULTSDIR}
-
-# Bowtie2 loop
-for i in ${FASTQDIR}/*.fq.gz
+# Align against both indexes in for loop
+for INDEX in ${INDEXLIST[@]}
 do
-        SAMPLE=$(basename $i | cut -d '.' -f 1)
         echo "--------------------------------"
-        echo "Processing sample: ${SAMPLE}"
-        bowtie2 -x ${INDEX} \
-                -U $i \
-                -S ${RESULTSDIR}/${SAMPLE}.sam \
-                --threads ${SLURM_CPUS_PER_TASK} \
-                --very-sensitive-local \
-                --no-unal \
-                --mp 3,1 \
-                --rdg 5,1 \
-                --rfg 5,1 \
-                --dpad 30
+        echo "Aligning against index: ${INDEX}"
+
+        # Make directories
+        INDEXNAME=$(basename ${INDEX})
+        RESULTSDIR=${PROJDIR}/02_bowtie2_outs/${INDEXNAME}
+        mkdir -p ${RESULTSDIR}
+
+        # Bowtie2 loop
+        for i in ${FASTQDIR}/*.fq.gz
+        do
+                SAMPLE=$(basename $i | cut -d '.' -f 1)
+                echo "--------------------------------"
+                echo "Processing sample: ${SAMPLE}"
+                bowtie2 -x ${INDEX} \
+                        -U $i \
+                        -S ${RESULTSDIR}/${SAMPLE}.sam \
+                        --threads ${SLURM_CPUS_PER_TASK} \
+                        --very-sensitive-local \
+                        --no-unal \
+                        --mp 3,1 \
+                        --rdg 5,1 \
+                        --rfg 5,1 \
+                        --dpad 30
+                echo "--------------------------------"
+        done
+
+        # Convert SAM to BAM
+        for i in ${RESULTSDIR}/*.sam
+        do
+                SAMPLE=$(basename $i | cut -d '.' -f 1)
+                echo "--------------------------------"
+                echo "Converting SAM to BAM for sample: ${SAMPLE}"
+                samtools view -bS $i > ${RESULTSDIR}/${SAMPLE}.bam
+                echo "--------------------------------"
+        done
+        # Sort BAM files
+        for i in ${RESULTSDIR}/*.bam
+        do
+                SAMPLE=$(basename $i | cut -d '.' -f 1)
+                echo "--------------------------------"
+                echo "Sorting BAM file for sample: ${SAMPLE}"
+                samtools sort $i -o ${RESULTSDIR}/${SAMPLE}_sorted.bam
+                echo "--------------------------------"
+        done
+
+        # Index BAM files
+        for i in ${RESULTSDIR}/*_sorted.bam
+        do
+                SAMPLE=$(basename $i | cut -d '.' -f 1)
+                echo "--------------------------------"
+                echo "Indexing BAM file for sample: ${SAMPLE}"
+                samtools index $i
+                echo "--------------------------------"
+        done
+
+        # Gather alignment statistics
+        for i in ${RESULTSDIR}/*_sorted.bam
+        do
+                SAMPLE=$(basename $i | cut -d '.' -f 1)
+                echo "--------------------------------"
+                echo "Gathering alignment statistics for sample: ${SAMPLE}"
+                samtools flagstat $i > ${RESULTSDIR}/${SAMPLE}_flagstat.txt
+                samtools idxstats $i > ${RESULTSDIR}/${SAMPLE}_idxstats.txt
+                echo "--------------------------------"
+        done
+
+        # Run multiqc on the output folder
+        echo "--------------------------------"
+        echo "Running MultiQC on the results directory"
+        multiqc ${RESULTSDIR} --outdir ${RESULTSDIR} --filename multiqc_report.html
         echo "--------------------------------"
 done
-
-# Convert SAM to BAM
-for i in ${RESULTSDIR}/*.sam
-do
-        SAMPLE=$(basename $i | cut -d '.' -f 1)
-        echo "--------------------------------"
-        echo "Converting SAM to BAM for sample: ${SAMPLE}"
-        samtools view -bS $i > ${RESULTSDIR}/${SAMPLE}.bam
-        echo "--------------------------------"
-done
-# Sort BAM files
-for i in ${RESULTSDIR}/*.bam
-do
-        SAMPLE=$(basename $i | cut -d '.' -f 1)
-        echo "--------------------------------"
-        echo "Sorting BAM file for sample: ${SAMPLE}"
-        samtools sort $i -o ${RESULTSDIR}/${SAMPLE}_sorted.bam
-        echo "--------------------------------"
-done
-
-# Index BAM files
-for i in ${RESULTSDIR}/*_sorted.bam
-do
-        SAMPLE=$(basename $i | cut -d '.' -f 1)
-        echo "--------------------------------"
-        echo "Indexing BAM file for sample: ${SAMPLE}"
-        samtools index $i
-        echo "--------------------------------"
-done
-
-# Gather alignment statistics
-for i in ${RESULTSDIR}/*_sorted.bam
-do
-        SAMPLE=$(basename $i | cut -d '.' -f 1)
-        echo "--------------------------------"
-        echo "Gathering alignment statistics for sample: ${SAMPLE}"
-        samtools flagstat $i > ${RESULTSDIR}/${SAMPLE}_flagstat.txt
-        samtools idxstats $i > ${RESULTSDIR}/${SAMPLE}_idxstats.txt
-        echo "--------------------------------"
-done
-
-# Run multiqc on the output folder
-echo "--------------------------------"
-echo "Running MultiQC on the results directory"
-multiqc ${RESULTSDIR} --outdir ${RESULTSDIR} --filename multiqc_report.html
-echo "--------------------------------"
 
 # End of script

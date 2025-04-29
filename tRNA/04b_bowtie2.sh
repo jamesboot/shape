@@ -33,7 +33,12 @@ do
                 -U $i \
                 -S ${RESULTSDIR}/${SAMPLE}.sam \
                 --threads ${SLURM_CPUS_PER_TASK} \
-                --very-sensitive
+                --very-sensitive-local \
+                --no-unal \
+                --mp 3,1 \
+                --rdg 5,1 \
+                --rfg 5,1 \
+                --dpad 30
         echo "--------------------------------"
 done
 

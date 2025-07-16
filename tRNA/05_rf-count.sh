@@ -13,16 +13,16 @@ ml SAMtools/1.18-GCC-12.3.0
 ml Singularity/3.6.4
 
 # Input parameters
-PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape
+PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v2
 
 INPUT1=${PROJDIR}/02_bowtie2_outs/tRNA_Ala_index
 INPUT2=${PROJDIR}/02_bowtie2_outs/tRNA_Pro_index
 
 INDEXDIR=${PROJDIR}/02_bowtie2_index
 INDEX1=${INDEXDIR}/tRNA_Ala_index
-FASTA1=${PROJDIR}/tRNA_Ala_AGC_2_1.fasta
+FASTA1=${PROJDIR}/tRNA_Ala_AGC_2_1.fa
 INDEX2=${INDEXDIR}/tRNA_Pro_index
-FASTA2=${PROJDIR}/tRNA_Pro_TGG_3_5.fasta
+FASTA2=${PROJDIR}/tRNA_Pro_TGG_3_5.fa
 
 # Static directories
 LEONORE=/camp/lab/bauerd/home/shared/singularity/amchakrabarti-leonore-0.1.0.img

@@ -13,7 +13,7 @@ ml SAMtools/1.18-GCC-12.3.0
 ml Singularity/3.6.4
 
 # Input parameters
-PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape
+PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v2
 INPUT1=${PROJDIR}/03_rf-count_Pro_outs
 
 # Static directories

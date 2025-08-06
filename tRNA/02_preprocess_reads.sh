@@ -29,8 +29,8 @@ HARDCLIP=19  # 27 or 19 depending on the library
 
 # Directories
 # Edit
-PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v2
-DESIGN=${PROJDIR}/samplesheet.csv
+PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v3
+DESIGN=${PROJDIR}/concat_reads/samplesheet_concat.csv
 # Do not edit
 THREADS=${SLURM_CPUS_PER_TASK}
 RESULTSDIR=${PROJDIR}/01_preprocess_reads_outs

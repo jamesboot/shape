@@ -4,7 +4,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=2
 #SBATCH --partition=ncpu
-#SBATCH --time='72:00:00'
+#SBATCH --time='00:30:00'
 #SBATCH --mem=32G
 
 # Modules
@@ -12,7 +12,7 @@ ml purge
 ml Singularity/3.6.4
 
 # Input parameters
-PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v3
+PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v4
 META=${PROJDIR}/meta.csv
 
 ITER=("Ala" "Pro")
@@ -100,18 +100,18 @@ do
             echo "Replicate number: ${NUM}"
             echo "Processing sample: ${TREATED_SAMPLE} vs ${UNTREATED_SAMPLE}"
             echo "Input directory: ${INPUT}"
-            echo "Full path to treated: ${INPUT}/${TREATED_SAMPLE}_L008_sorted.rc"
-            echo "Full path to untreated: ${INPUT}/${UNTREATED_SAMPLE}_L008_sorted.rc"
+            echo "Full path to treated: ${INPUT}/${TREATED_SAMPLE}_dedup.rc"
+            echo "Full path to untreated: ${INPUT}/${UNTREATED_SAMPLE}_dedup.rc"
             echo "--------------------------------"
 
             # Check if treated and untreated files exist
             echo "--------------------------------"
-            if [[ ! -f "${INPUT}/${TREATED_SAMPLE}_L008_sorted.rc" ]]; then
-                echo "Error: Treated file ${INPUT}/${TREATED_SAMPLE}_L008_sorted.rc does not exist."
+            if [[ ! -f "${INPUT}/${TREATED_SAMPLE}_dedup.rc" ]]; then
+                echo "Error: Treated file ${INPUT}/${TREATED_SAMPLE}_dedup.rc does not exist."
                 exit 1
             fi
-            if [[ ! -f "${INPUT}/${UNTREATED_SAMPLE}_L008_sorted.rc" ]]; then
-                echo "Error: Untreated file ${INPUT}/${UNTREATED_SAMPLE}_L008_sorted.rc does not exist."
+            if [[ ! -f "${INPUT}/${UNTREATED_SAMPLE}_dedup.rc" ]]; then
+                echo "Error: Untreated file ${INPUT}/${UNTREATED_SAMPLE}_dedup.rc does not exist."
                 exit 1
             fi
             echo "Treated and untreated files exist."
@@ -128,8 +128,8 @@ do
                     rf-norm \
                         --processors ${SLURM_CPUS_PER_TASK} \
                         --overwrite \
-                        --untreated "${INPUT}/${UNTREATED_SAMPLE}_L008_sorted.rc" \
-                        --treated "${INPUT}/${TREATED_SAMPLE}_L008_sorted.rc" \
+                        --untreated "${INPUT}/${UNTREATED_SAMPLE}_dedup.rc" \
+                        --treated "${INPUT}/${TREATED_SAMPLE}_dedup.rc" \
                         --reactive-bases AC \
                         --scoring-method 3 \
                         --norm-method 1 \
@@ -155,8 +155,8 @@ do
                     rf-norm \
                         --processors ${SLURM_CPUS_PER_TASK} \
                         --overwrite \
-                        --untreated "${INPUT}/${UNTREATED_SAMPLE}_L008_sorted.rc" \
-                        --treated "${INPUT}/${TREATED_SAMPLE}_L008_sorted.rc" \
+                        --untreated "${INPUT}/${UNTREATED_SAMPLE}_dedup.rc" \
+                        --treated "${INPUT}/${TREATED_SAMPLE}_dedup.rc" \
                         --reactive-bases N \
                         --scoring-method 3 \
                         --norm-method 1 \

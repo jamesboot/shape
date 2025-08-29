@@ -76,8 +76,8 @@ do
         -r "0:75" \
         --limit_y TRUE \
         --qc \
-        --rc_files ${RCDIR}/${TREATED_GROUP[0]}_sorted_cov.txt,${RCDIR}/${TREATED_GROUP[1]}_sorted_cov.txt,${RCDIR}/${TREATED_GROUP[2]}_sorted_cov.txt \
-        --rc_controls ${RCDIR}/${UNTREATED_GROUP[0]}_sorted_cov.txt,${RCDIR}/${UNTREATED_GROUP[1]}_sorted_cov.txt,${RCDIR}/${UNTREATED_GROUP[2]}_sorted_cov.txt
+        --rc_files ${RCDIR}/${TREATED_GROUP[0]}_dedup_cov.txt,${RCDIR}/${TREATED_GROUP[1]}_dedup_cov.txt,${RCDIR}/${TREATED_GROUP[2]}_dedup_cov.txt \
+        --rc_controls ${RCDIR}/${UNTREATED_GROUP[0]}_dedup_cov.txt,${RCDIR}/${UNTREATED_GROUP[1]}_dedup_cov.txt,${RCDIR}/${UNTREATED_GROUP[2]}_dedup_cov.txt
         echo "Finished processing ${AA} with reagent ${REAGENT}"
     done
 done

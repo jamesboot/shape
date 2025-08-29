@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#SBATCH --job-name=rf-wiggle
+#SBATCH --job-name=rf-fold
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=2
 #SBATCH --partition=ncpu
@@ -12,7 +12,7 @@ ml purge
 ml Singularity/3.6.4
 
 # Input parameters
-PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v3
+PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v4
 ITER=("Ala" "Pro" "Pro_Dic")
 
 # Static directories

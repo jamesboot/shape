@@ -1,7 +1,7 @@
 # Script for coverage plots of tRNA
 
 # Setwd
-setwd('/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v3')
+setwd('/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v4')
 
 # Packages
 library(data.table)

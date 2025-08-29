@@ -5,7 +5,7 @@ library(dplyr)
 library(ggplot2)
 library(XML)
 
-setwd('../trna_shape_v3/')
+setwd('../trna_shape_v4/')
 
 # Plot difference between Proline and Pro-Dicer within treatment
 
@@ -71,6 +71,9 @@ ggplot(data.frame(delta_mean), aes(seq_along(delta_mean), delta_mean)) +
   ylab('Delta Norm SHAPE Reactivity') +
   ggtitle('Pro vs Dicer DMS')
 
+ggsave(plot = last_plot(),
+       file = 'DMS_Pro_v_Dicer_Delta.png')
+
 # Now calculate delta and plot - for Pro vs Dicer DMS
 delta_mean <- reactivities$Pro_5NIA$row_mean - reactivities$ProDic_5NIA$row_mean
 delta_p_sd <- reactivities$Pro_5NIA$mean_p_sd - reactivities$ProDic_5NIA$mean_p_sd
@@ -84,3 +87,6 @@ ggplot(data.frame(delta_mean), aes(seq_along(delta_mean), delta_mean)) +
   xlab('tRNA Position') +
   ylab('Delta Norm SHAPE Reactivity') +
   ggtitle('Pro vs Dicer DMS')
+
+ggsave(plot = last_plot(),
+       file = '5NIA_Pro_v_Dicer_Delta.png')

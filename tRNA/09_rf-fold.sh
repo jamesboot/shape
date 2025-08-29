@@ -4,7 +4,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=2
 #SBATCH --partition=ncpu
-#SBATCH --time='72:00:00'
+#SBATCH --time='00:10:00'
 #SBATCH --mem=32G
 
 # Modules

@@ -13,7 +13,7 @@ ml FastQC/0.11.8-Java-1.8
 ml MultiQC/1.25.1
 
 # Define directories
-PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v2
+PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v3
 RESULTSDIR=${PROJDIR}/01_preprocess_reads_outs
 INPUTDIR=${RESULTSDIR}/05_adjusted_header
 FASTQCDIR=${RESULTSDIR}/06_fastqc

@@ -4,7 +4,7 @@
 
 # Input parameters
 ENVDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v2
-BASEDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v3
+BASEDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v4
 AMINO_ACIDS=("Ala" "Pro" "Pro_Dic")
 REAGENTS=("DMS" "5NIA")
 META=${BASEDIR}/meta.csv
@@ -68,7 +68,7 @@ do
 
         # Run the shapeplotr script
         echo "Running shapeplotr for ${AA} with reagent ${REAGENT}"
-        ./Rscript ${BASEDIR}/shapeplotr.R \
+        ./Rscript /nemo/stp/babs/working/bootj/github/RNA_SHAPE/tRNA/shapeplotr.R \
         -d ${FOLDOUTS}/dotplot/tRNA.dp \
         -x ${WIGOUTS}_0/tRNA.wig,${WIGOUTS}_1/tRNA.wig,${WIGOUTS}_2/tRNA.wig \
         -s ${FOLDOUTS}/shannon/tRNA.wig \

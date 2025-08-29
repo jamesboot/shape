@@ -2,11 +2,11 @@
 
 # Script to run rf-combine and then rf-fold for tRNA data
 
-#SBATCH --job-name=rf-wiggle
+#SBATCH --job-name=rf-comb-fold
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=2
 #SBATCH --partition=ncpu
-#SBATCH --time='72:00:00'
+#SBATCH --time='00:10:00'
 #SBATCH --mem=32G
 
 # Modules
@@ -14,7 +14,7 @@ ml purge
 ml Singularity/3.6.4
 
 # Input parameters
-PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v3
+PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v4
 ITER=("Ala" "Pro" "Pro_Dic")
 
 # Static directories
@@ -32,7 +32,7 @@ do
     echo "--------------------------------"
     echo "Processing ${AA} samples"
     echo "--------------------------------"
-    INPUT=${PROJDIR}/UMI_DEDUP/04_rf-norm_${AA}_outs
+    INPUT=${PROJDIR}/04_rf-norm_${AA}_outs
 
     # Loop through reagents
     for REAGENT in "${REAGENTS[@]}"
@@ -44,7 +44,7 @@ do
         # Log
         echo "--------------------------------"
         echo "Making output directories"
-        OUTPUT1=${PROJDIR}/UMI_DEDUP/06_rf-combine_${AA}_${REAGENT}
+        OUTPUT1=${PROJDIR}/06_rf-combine_${AA}_${REAGENT}
         mkdir -p ${OUTPUT1}
         echo "--------------------------------"
 
@@ -65,7 +65,7 @@ do
         echo "--------------------------------"
         echo "Running rf-fold for ${AA} with reagent ${REAGENT}"
         echo "--------------------------------"
-        FOLD=${PROJDIR}/UMI_DEDUP/07_rf-fold_${AA}_${REAGENT}_comb_outs
+        FOLD=${PROJDIR}/07_rf-fold_${AA}_${REAGENT}_comb_outs
         mkdir -p ${FOLD}
         singularity exec \
             -B ${PROJDIR}:${PROJDIR} ${LEONORE} \

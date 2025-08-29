@@ -4,7 +4,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --partition=ncpu
-#SBATCH --time='1:00:00'
+#SBATCH --time='00:10:00'
 #SBATCH --mem=8G
 
 # Modules
@@ -12,7 +12,7 @@ ml purge
 ml Singularity/3.6.4
 
 # Input parameters
-PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v3
+PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v4
 ITER=("Ala" "Pro")
 
 # Static directories

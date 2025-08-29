@@ -13,7 +13,7 @@ ml SAMtools/1.18-GCC-12.3.0
 ml Singularity/3.6.4
 
 # Input parameters
-PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v2
+PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v3
 
 INPUT1=${PROJDIR}/02_bowtie2_outs/tRNA_Ala_index
 INPUT2=${PROJDIR}/02_bowtie2_outs/tRNA_Pro_index

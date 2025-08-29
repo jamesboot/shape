@@ -74,6 +74,7 @@ do
         -s ${FOLDOUTS}/shannon/tRNA.wig \
         -o ${BASEDIR}/${AA}_${REAGENT}_shapeplotr.pdf \
         -r "0:75" \
+        --limit_y 1.5 \
         --qc \
         --rc_files ${RCDIR}/${TREATED_GROUP[0]}_sorted_cov.txt,${RCDIR}/${TREATED_GROUP[1]}_sorted_cov.txt,${RCDIR}/${TREATED_GROUP[2]}_sorted_cov.txt \
         --rc_controls ${RCDIR}/${UNTREATED_GROUP[0]}_sorted_cov.txt,${RCDIR}/${UNTREATED_GROUP[1]}_sorted_cov.txt,${RCDIR}/${UNTREATED_GROUP[2]}_sorted_cov.txt

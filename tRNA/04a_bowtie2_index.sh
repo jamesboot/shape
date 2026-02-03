@@ -14,7 +14,7 @@ ml purge
 ml Bowtie2/2.5.1-GCC-12.3.0
 
 # Directories
-PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape
+PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v2
 INDEXDIR=${PROJDIR}/02_bowtie2_index
 INPUT1=${PROJDIR}/tRNA_Ala_AGC_2_1.fa
 INPUT2=${PROJDIR}/tRNA_Pro_TGG_3_5.fa

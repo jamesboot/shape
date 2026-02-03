@@ -14,11 +14,12 @@ ml SAMtools/1.18-GCC-12.3.0
 ml MultiQC/1.25.1
 
 # Directories
-PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape
+V2DIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v2
+PROJDIR=/nemo/stp/babs/working/bootj/projects/bauerd/nuno.santos/trna_shape_v3
 PREPROCESSDIR=${PROJDIR}/01_preprocess_reads_outs
 FASTQDIR=${PREPROCESSDIR}/05_adjusted_header
-INDEX1=${PROJDIR}/02_bowtie2_index/tRNA_Ala_index
-INDEX2=${PROJDIR}/02_bowtie2_index/tRNA_Pro_index
+INDEX1=${V2DIR}/02_bowtie2_index/tRNA_Ala_index
+INDEX2=${V2DIR}/02_bowtie2_index/tRNA_Pro_index
 INDEXLIST=(${INDEX1} ${INDEX2})
 
 # Align against both indexes in for loop

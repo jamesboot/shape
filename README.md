@@ -8,6 +8,8 @@ This pipeline processes high-throughput sequencing data from tRNA SHAPE experime
 
 This contains scripts for running SHAPE analysis on tRNA data for Nuno Santos and Arianna Di Fazio.
 
+tRNA sequences are included as fasta files in the tRNA folder - these were used to create alignment indices.
+
 ### Pipeline Execution Order
 
 #### Step 1: Prepare Samplesheet
